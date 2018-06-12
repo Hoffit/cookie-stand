@@ -27,10 +27,14 @@ var firstAndPike = {
   },
   renderStoreProjections : function() {
     var ulElement = document.getElementById('firstAndPike');
+    var startTime = parseInt(this.openingTime/100);
+    var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');     
-      liEl.textContent = this.hourlyProjections[i]+' cookies';
+      var liEl = document.createElement('li');
+      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
+      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
+      currentHour++;
     }
   }
 };
@@ -56,17 +60,21 @@ var seaTacAirport = {
   },
   renderStoreProjections : function() {
     var ulElement = document.getElementById('seaTacAirport');
+    var startTime = parseInt(this.openingTime/100);
+    var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');     
-      liEl.textContent = this.hourlyProjections[i]+' cookies';
+      var liEl = document.createElement('li');
+      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
+      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
+      currentHour++;
     }
   }
 };
 seaTacAirport.calculateCookiesPerHour();
 seaTacAirport.renderStoreProjections();
 
-//1st and Pike
+//Seattle Center
 var seattleCenter = {
   minCustomersPerHour: 11,
   maxCustomersPerHour: 38,
@@ -85,10 +93,14 @@ var seattleCenter = {
   },
   renderStoreProjections : function() {
     var ulElement = document.getElementById('seattleCenter');
+    var startTime = parseInt(this.openingTime/100);
+    var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.hourlyProjections[i]+' cookies';
+      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
+      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
+      currentHour++;
     }
   }
 };
@@ -114,10 +126,14 @@ var capitolHill = {
   },
   renderStoreProjections : function() {
     var ulElement = document.getElementById('capitolHill');
+    var startTime = parseInt(this.openingTime/100);
+    var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.hourlyProjections[i]+' cookies';
+      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
+      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
+      currentHour++;
     }
   }
 };
@@ -143,10 +159,14 @@ var alki = {
   },
   renderStoreProjections : function() {
     var ulElement = document.getElementById('alki');
+    var startTime = parseInt(this.openingTime/100);
+    var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
-      liEl.textContent = this.hourlyProjections[i]+' cookies';
+      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
+      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
+      currentHour++;
     }
   }
 };

@@ -1,29 +1,33 @@
 body {
-  background-color:rgb(169,218,5);
+  background-color: rgba(0, 250, 154, 0.5);
 }
 
 header {
-  display: block;
+  display:block;
 }
 
 h1 {
-  display: block;
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
+  font-family: 'Lobster', cursive;
+  color: salmon;
+  font-size: x-large
 }
 
-h2 {
-  display: block;
-  font-size: 1.5em;
-  margin-top: 0.83em;
-  margin-bottom: 0.83em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
+/*1. A custom Google font for highlights*/
+h2, b, strong, i, em, mark {
+  font-family: 'Lobster', cursive;
+  color: salmon
+}
+
+/*2. A specified standard san-serif web font for data (such as Arial, Verdana, or Helvetica)*/
+data {
+  font-family: 'Arial', sans-serif;
+  color:blue
+}
+
+/*3. A specified standard serif web font for text (such as Georgia, Times, etc.)*/
+text {
+  font-family: 'Times', serif;
+  color: black
 }
 
 ul {
