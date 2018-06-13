@@ -7,6 +7,9 @@
 //The locations for which to report sales figures
 var cookieShopLocations = [];
 
+//Create a totals array for each hour stores are open
+var hourlySalesTotal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 //Get the DOM table object to populate with location sales information.
 var cookieShopLocationTable = document.getElementById('CookieShopSalesTable');
 
@@ -72,20 +75,37 @@ CookieShop.prototype.renderRow = function() {
 };
 
 //Enable shop instance to populate table row with their hourly sales projections
-CookieShop.prototype.renderFooter = function() {
+CookieShop.renderFooter = function() {
   var trElement = document.createElement('tr');// create tr
-  //Populate first cell in row with "Total" string
   var tdElement = document.createElement('td');// create td
   tdElement.textContent = 'Total';// give td content
   trElement.appendChild(tdElement);// append td to tr
-  //Now loop through each hour and populate the cell with total sales projection
-  var hoursOpen = (this.closingTime-this.openingTime)/100;
-  for(var i=0; i<hoursOpen; i++) {
+  //Loop through the 15 hours of open time, and populate sums
+  for(var i=0; i<hourlySalesTotal.length; i++) {
     tdElement = document.createElement('td');
-    tdElement.textContent = this.totalCookiesPerDay;
+    tdElement.textContent = hourlySalesTotal[i];
     trElement.appendChild(tdElement);
   }
   cookieShopLocationTable.appendChild(trElement);
+};
+
+//Convenience method to loop through and render all the shops sales data.
+CookieShop.renderAllShops = function() {
+  for(var i=0; i<cookieShopLocations.length; i++) {
+    cookieShopLocations[i].renderRow();
+  }
+};
+
+//Build out hourly totals array for table footer
+CookieShop.calculateHourlyTotals = function() {
+  for(var i=0; i<cookieShopLocations.length; i++) {
+    var aCookieShop = cookieShopLocations[i];
+    var numberOfHourlyProjections = aCookieShop.hourlyProjections.length;
+    console.log(aCookieShop);
+    for(var j=0; j<numberOfHourlyProjections; j++) {
+      hourlySalesTotal[j] += aCookieShop.hourlyProjections[j];
+    }
+  }
 };
 
 //Instantiate five cookie shop objects.
@@ -95,16 +115,7 @@ new CookieShop('Seattle Center', 11, 38, 3.7);
 new CookieShop('Capitol Hill', 20, 38, 2.3);
 new CookieShop('Alki', 2, 16, 4.6);
 
-//Convenience method to loop through and render all the shops sales data.
-CookieShop.renderAllShops = function() {
-  for(var i=0; i<cookieShopLocations.length; i++) {
-    cookieShopLocations[i].renderRow();
-  }
-};
-
 CookieShop.renderHeader();
 CookieShop.renderAllShops();
-/**
- * This foot business is tricky - work it out.
- */
-//CookieShop.renderFooter();
+CookieShop.calculateHourlyTotals();
+CookieShop.renderFooter();

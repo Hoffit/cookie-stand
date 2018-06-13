@@ -37,7 +37,7 @@ h2, h3, h4 {
 }
 
 /*2. A specified standard san-serif web font for data (such as Arial, Verdana, or Helvetica)*/
-.data {
+td {
   font-family: 'Helvetica', sans-serif;
   color:blue;
   font-size: small;
@@ -67,4 +67,8 @@ img.medium {
 .boxed {
   border: 1px solid silver;
   padding: 10px 5px 10px 5px
+}
+
+table, th, td {
+  border: 1px solid black;
 }
