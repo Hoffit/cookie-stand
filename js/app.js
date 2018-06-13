@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * This program is created as a part of a training exercise. The program is a ...
  */
@@ -13,6 +12,7 @@ var firstAndPike = {
   minCustomersPerHour: 23,
   maxCustomersPerHour: 65,
   averageCookiesPerCustomer: 6.3,
+  totalCookiesPerLocation: 0,
   openingTime: '0600',
   closingTime: '2100',
   hourlyProjections: [],
@@ -23,6 +23,7 @@ var firstAndPike = {
     var hoursOpen = (this.closingTime-this.openingTime)/100;
     for(var i=0;i<hoursOpen;i++) {
       this.hourlyProjections[i] = this.calculateCustomersPerHour();
+      this.totalCookiesPerLocation += this.hourlyProjections[i];
     }
   },
   renderStoreProjections : function() {
@@ -31,11 +32,16 @@ var firstAndPike = {
     var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
+      liEl.className = 'data';
       var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
       liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
       currentHour++;
     }
+    liEl = document.createElement('li');
+    liEl.className = 'data';
+    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
+    ulElement.appendChild(liEl);
   }
 };
 firstAndPike.calculateCookiesPerHour();
@@ -46,6 +52,7 @@ var seaTacAirport = {
   minCustomersPerHour: 3,
   maxCustomersPerHour: 24,
   averageCookiesPerCustomer: 1.2,
+  totalCookiesPerLocation: 0,
   openingTime: '0600',
   closingTime: '2100',
   hourlyProjections: [],
@@ -56,6 +63,7 @@ var seaTacAirport = {
     var hoursOpen = (this.closingTime-this.openingTime)/100;
     for(var i=0;i<hoursOpen;i++) {
       this.hourlyProjections[i] = this.calculateCustomersPerHour();
+      this.totalCookiesPerLocation += this.hourlyProjections[i];
     }
   },
   renderStoreProjections : function() {
@@ -64,11 +72,16 @@ var seaTacAirport = {
     var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
+      liEl.className = 'data';
       var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
       liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
       currentHour++;
     }
+    liEl = document.createElement('li');
+    liEl.className = 'data';
+    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
+    ulElement.appendChild(liEl);
   }
 };
 seaTacAirport.calculateCookiesPerHour();
@@ -79,6 +92,7 @@ var seattleCenter = {
   minCustomersPerHour: 11,
   maxCustomersPerHour: 38,
   averageCookiesPerCustomer: 3.7,
+  totalCookiesPerLocation: 0,
   openingTime: '0600',
   closingTime: '2100',
   hourlyProjections: [],
@@ -89,6 +103,7 @@ var seattleCenter = {
     var hoursOpen = (this.closingTime-this.openingTime)/100;
     for(var i=0;i<hoursOpen;i++) {
       this.hourlyProjections[i] = this.calculateCustomersPerHour();
+      this.totalCookiesPerLocation += this.hourlyProjections[i];
     }
   },
   renderStoreProjections : function() {
@@ -97,11 +112,16 @@ var seattleCenter = {
     var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
+      liEl.className = 'data';
       var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
       liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
       currentHour++;
     }
+    liEl = document.createElement('li');
+    liEl.className = 'data';
+    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
+    ulElement.appendChild(liEl);
   }
 };
 seattleCenter.calculateCookiesPerHour();
@@ -112,6 +132,7 @@ var capitolHill = {
   minCustomersPerHour: 20,
   maxCustomersPerHour: 38,
   averageCookiesPerCustomer: 2.3,
+  totalCookiesPerLocation: 0,
   openingTime: '0600',
   closingTime: '2100',
   hourlyProjections: [],
@@ -122,6 +143,7 @@ var capitolHill = {
     var hoursOpen = (this.closingTime-this.openingTime)/100;
     for(var i=0;i<hoursOpen;i++) {
       this.hourlyProjections[i] = this.calculateCustomersPerHour();
+      this.totalCookiesPerLocation += this.hourlyProjections[i];
     }
   },
   renderStoreProjections : function() {
@@ -130,11 +152,16 @@ var capitolHill = {
     var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
+      liEl.className = 'data';
       var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
       liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
       currentHour++;
     }
+    liEl = document.createElement('li');
+    liEl.className = 'data';
+    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
+    ulElement.appendChild(liEl);
   }
 };
 capitolHill.calculateCookiesPerHour();
@@ -145,6 +172,7 @@ var alki = {
   minCustomersPerHour: 2,
   maxCustomersPerHour: 16,
   averageCookiesPerCustomer: 4.6,
+  totalCookiesPerLocation: 0,
   openingTime: '0600',
   closingTime: '2100',
   hourlyProjections: [],
@@ -155,6 +183,7 @@ var alki = {
     var hoursOpen = (this.closingTime-this.openingTime)/100;
     for(var i=0;i<hoursOpen;i++) {
       this.hourlyProjections[i] = this.calculateCustomersPerHour();
+      this.totalCookiesPerLocation += this.hourlyProjections[i];
     }
   },
   renderStoreProjections : function() {
@@ -163,11 +192,16 @@ var alki = {
     var currentHour = startTime;
     for(var i=0;i<this.hourlyProjections.length;i++) {
       var liEl = document.createElement('li');
+      liEl.className = 'data';
       var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
       liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
       ulElement.appendChild(liEl);
       currentHour++;
     }
+    liEl = document.createElement('li');
+    liEl.className = 'data';
+    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
+    ulElement.appendChild(liEl);
   }
 };
 alki.calculateCookiesPerHour();
