@@ -1,208 +1,110 @@
 'use strict';
 /**
- * This program is created as a part of a training exercise. The program is a ...
+ * This program is created as a part of a training exercise. The program projects hourly sales
+ * at several retail locations for a hypothetical Salmon Cookie shop business.
  */
 
-//Object literal creation...
+//The locations for which to report sales figures
+var cookieShopLocations = [];
+
+//Get the DOM table object to populate with location sales information.
+var cookieShopLocationTable = document.getElementById('CookieShopSalesTable');
+
 /**
+ * Cookie Shop Object with constructor and methods.
  *
  */
-//1st and Pike
-var firstAndPike = {
-  minCustomersPerHour: 23,
-  maxCustomersPerHour: 65,
-  averageCookiesPerCustomer: 6.3,
-  totalCookiesPerLocation: 0,
-  openingTime: '0600',
-  closingTime: '2100',
-  hourlyProjections: [],
-  calculateCustomersPerHour : function() {
-    return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; //The maximum is exclusive and the minimum is inclusive
-  },
-  calculateCookiesPerHour: function() {
-    var hoursOpen = (this.closingTime-this.openingTime)/100;
-    for(var i=0;i<hoursOpen;i++) {
-      this.hourlyProjections[i] = this.calculateCustomersPerHour();
-      this.totalCookiesPerLocation += this.hourlyProjections[i];
-    }
-  },
-  renderStoreProjections : function() {
-    var ulElement = document.getElementById('firstAndPike');
-    var startTime = parseInt(this.openingTime/100);
-    var currentHour = startTime;
-    for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');
-      liEl.className = 'data';
-      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
-      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
-      ulElement.appendChild(liEl);
-      currentHour++;
-    }
-    liEl = document.createElement('li');
-    liEl.className = 'data';
-    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
-    ulElement.appendChild(liEl);
-  }
-};
-firstAndPike.calculateCookiesPerHour();
-firstAndPike.renderStoreProjections();
+function CookieShop(locationName, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer) {
+  this.locationName = locationName;
+  this.minCustomersPerHour = minCustomersPerHour;
+  this.maxCustomersPerHour = maxCustomersPerHour;
+  this.averageCookiesPerCustomer = averageCookiesPerCustomer;
+  this.openingTime = '0600';
+  this.closingTime = '2100';
+  this.hourlyProjections = [];
+  this.totalCookiesPerDay = 0;
+  this.calculateCookiesPerHour();
+  cookieShopLocations.push(this);
+}
 
-//SeaTac Airport
-var seaTacAirport = {
-  minCustomersPerHour: 3,
-  maxCustomersPerHour: 24,
-  averageCookiesPerCustomer: 1.2,
-  totalCookiesPerLocation: 0,
-  openingTime: '0600',
-  closingTime: '2100',
-  hourlyProjections: [],
-  calculateCustomersPerHour : function() {
-    return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; //The maximum is exclusive and the minimum is inclusive
-  },
-  calculateCookiesPerHour: function() {
-    var hoursOpen = (this.closingTime-this.openingTime)/100;
-    for(var i=0;i<hoursOpen;i++) {
-      this.hourlyProjections[i] = this.calculateCustomersPerHour();
-      this.totalCookiesPerLocation += this.hourlyProjections[i];
-    }
-  },
-  renderStoreProjections : function() {
-    var ulElement = document.getElementById('seaTacAirport');
-    var startTime = parseInt(this.openingTime/100);
-    var currentHour = startTime;
-    for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');
-      liEl.className = 'data';
-      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
-      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
-      ulElement.appendChild(liEl);
-      currentHour++;
-    }
-    liEl = document.createElement('li');
-    liEl.className = 'data';
-    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
-    ulElement.appendChild(liEl);
-  }
+//Simulate real sales data using random number of customers in a range.
+CookieShop.prototype.calculateCustomersPerHour = function() {
+  return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; 
 };
-seaTacAirport.calculateCookiesPerHour();
-seaTacAirport.renderStoreProjections();
 
-//Seattle Center
-var seattleCenter = {
-  minCustomersPerHour: 11,
-  maxCustomersPerHour: 38,
-  averageCookiesPerCustomer: 3.7,
-  totalCookiesPerLocation: 0,
-  openingTime: '0600',
-  closingTime: '2100',
-  hourlyProjections: [],
-  calculateCustomersPerHour : function() {
-    return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; //The maximum is exclusive and the minimum is inclusive
-  },
-  calculateCookiesPerHour: function() {
-    var hoursOpen = (this.closingTime-this.openingTime)/100;
-    for(var i=0;i<hoursOpen;i++) {
-      this.hourlyProjections[i] = this.calculateCustomersPerHour();
-      this.totalCookiesPerLocation += this.hourlyProjections[i];
-    }
-  },
-  renderStoreProjections : function() {
-    var ulElement = document.getElementById('seattleCenter');
-    var startTime = parseInt(this.openingTime/100);
-    var currentHour = startTime;
-    for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');
-      liEl.className = 'data';
-      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
-      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
-      ulElement.appendChild(liEl);
-      currentHour++;
-    }
-    liEl = document.createElement('li');
-    liEl.className = 'data';
-    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
-    ulElement.appendChild(liEl);
+//Use the simulated customer data from calculateCustomersPerHour to create hourly sales projections.
+CookieShop.prototype.calculateCookiesPerHour = function() {
+  var hoursOpen = (this.closingTime-this.openingTime)/100;
+  for(var i=0; i<hoursOpen; i++) {
+    this.hourlyProjections[i] = this.calculateCustomersPerHour();
+    this.totalCookiesPerDay += this.hourlyProjections[i];
   }
 };
-seattleCenter.calculateCookiesPerHour();
-seattleCenter.renderStoreProjections();
 
-//Capitol Hill
-var capitolHill = {
-  minCustomersPerHour: 20,
-  maxCustomersPerHour: 38,
-  averageCookiesPerCustomer: 2.3,
-  totalCookiesPerLocation: 0,
-  openingTime: '0600',
-  closingTime: '2100',
-  hourlyProjections: [],
-  calculateCustomersPerHour : function() {
-    return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; //The maximum is exclusive and the minimum is inclusive
-  },
-  calculateCookiesPerHour: function() {
-    var hoursOpen = (this.closingTime-this.openingTime)/100;
-    for(var i=0;i<hoursOpen;i++) {
-      this.hourlyProjections[i] = this.calculateCustomersPerHour();
-      this.totalCookiesPerLocation += this.hourlyProjections[i];
-    }
-  },
-  renderStoreProjections : function() {
-    var ulElement = document.getElementById('capitolHill');
-    var startTime = parseInt(this.openingTime/100);
-    var currentHour = startTime;
-    for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');
-      liEl.className = 'data';
-      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
-      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
-      ulElement.appendChild(liEl);
-      currentHour++;
-    }
-    liEl = document.createElement('li');
-    liEl.className = 'data';
-    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
-    ulElement.appendChild(liEl);
+//Create the table header, one column for each hour of shop data.
+CookieShop.renderHeader = function () {
+  var headerRow = document.createElement('tr');
+  var headings = ['6:00am','7:00am','8:00a,','9:00am', '10:00am', '11:00', '12:00pm',
+    '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
+  for(var i=0; i<headings.length; i++) {
+    var thElement = document.createElement('th');// 1. create th elements
+    thElement.textContent = headings[i];// 2. fill in their content
+    headerRow.appendChild(thElement);// 3. append th to headerRow
+    cookieShopLocationTable.appendChild(headerRow);
   }
 };
-capitolHill.calculateCookiesPerHour();
-capitolHill.renderStoreProjections();
 
-//Alki
-var alki = {
-  minCustomersPerHour: 2,
-  maxCustomersPerHour: 16,
-  averageCookiesPerCustomer: 4.6,
-  totalCookiesPerLocation: 0,
-  openingTime: '0600',
-  closingTime: '2100',
-  hourlyProjections: [],
-  calculateCustomersPerHour : function() {
-    return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; //The maximum is exclusive and the minimum is inclusive
-  },
-  calculateCookiesPerHour: function() {
-    var hoursOpen = (this.closingTime-this.openingTime)/100;
-    for(var i=0;i<hoursOpen;i++) {
-      this.hourlyProjections[i] = this.calculateCustomersPerHour();
-      this.totalCookiesPerLocation += this.hourlyProjections[i];
-    }
-  },
-  renderStoreProjections : function() {
-    var ulElement = document.getElementById('alki');
-    var startTime = parseInt(this.openingTime/100);
-    var currentHour = startTime;
-    for(var i=0;i<this.hourlyProjections.length;i++) {
-      var liEl = document.createElement('li');
-      liEl.className = 'data';
-      var hourMsg = (currentHour>12 ? (currentHour-12)+'pm: ' : (currentHour+'am: '));
-      liEl.textContent = hourMsg+this.hourlyProjections[i]+' cookies';
-      ulElement.appendChild(liEl);
-      currentHour++;
-    }
-    liEl = document.createElement('li');
-    liEl.className = 'data';
-    liEl.textContent = 'Total: '+this.totalCookiesPerLocation+' cookies';
-    ulElement.appendChild(liEl);
+//Enable shop instance to populate table row with their hourly sales projections
+CookieShop.prototype.renderRow = function() {
+  var trElement = document.createElement('tr');// create tr
+  //Populate first cell in row with shop name
+  var tdElement = document.createElement('td');// create td
+  tdElement.textContent = this.locationName;// give td content
+  trElement.appendChild(tdElement);// append td to tr
+  //Now loop through each hour and populate the cell with sales projection
+  var hoursOpen = (this.closingTime-this.openingTime)/100;
+  for(var i=0; i<hoursOpen; i++) {
+    tdElement = document.createElement('td');
+    tdElement.textContent = this.hourlyProjections[i];
+    trElement.appendChild(tdElement);
+  }
+  cookieShopLocationTable.appendChild(trElement);
+};
+
+//Enable shop instance to populate table row with their hourly sales projections
+CookieShop.prototype.renderFooter = function() {
+  var trElement = document.createElement('tr');// create tr
+  //Populate first cell in row with "Total" string
+  var tdElement = document.createElement('td');// create td
+  tdElement.textContent = 'Total';// give td content
+  trElement.appendChild(tdElement);// append td to tr
+  //Now loop through each hour and populate the cell with total sales projection
+  var hoursOpen = (this.closingTime-this.openingTime)/100;
+  for(var i=0; i<hoursOpen; i++) {
+    tdElement = document.createElement('td');
+    tdElement.textContent = this.totalCookiesPerDay;
+    trElement.appendChild(tdElement);
+  }
+  cookieShopLocationTable.appendChild(trElement);
+};
+
+//Instantiate five cookie shop objects.
+new CookieShop('1st and Pike', 23, 65, 6.3);
+new CookieShop('SeaTac Airport', 3, 24, 1.2);
+new CookieShop('Seattle Center', 11, 38, 3.7);
+new CookieShop('Capitol Hill', 20, 38, 2.3);
+new CookieShop('Alki', 2, 16, 4.6);
+
+//Convenience method to loop through and render all the shops sales data.
+CookieShop.renderAllShops = function() {
+  for(var i=0; i<cookieShopLocations.length; i++) {
+    cookieShopLocations[i].renderRow();
   }
 };
-alki.calculateCookiesPerHour();
-alki.renderStoreProjections();
+
+CookieShop.renderHeader();
+CookieShop.renderAllShops();
+/**
+ * This foot business is tricky - work it out.
+ */
+//CookieShop.renderFooter();
