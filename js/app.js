@@ -47,8 +47,8 @@ CookieShop.prototype.calculateCookiesPerHour = function() {
 //Create the table header, one column for each hour of shop data.
 CookieShop.renderHeader = function () {
   var headerRow = document.createElement('tr');
-  var headings = ['6:00am','7:00am','8:00a,','9:00am', '10:00am', '11:00', '12:00pm',
-    '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
+  var headings = ['', '6:00am','7:00am','8:00a,','9:00am', '10:00am', '11:00', '12:00pm',
+    '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', 'Total'];
   for(var i=0; i<headings.length; i++) {
     var thElement = document.createElement('th');// 1. create th elements
     thElement.textContent = headings[i];// 2. fill in their content
@@ -59,11 +59,15 @@ CookieShop.renderHeader = function () {
 
 //Enable shop instance to populate table row with their hourly sales projections
 CookieShop.prototype.renderRow = function() {
+
   var trElement = document.createElement('tr');// create tr
+
   //Populate first cell in row with shop name
   var tdElement = document.createElement('td');// create td
+
   tdElement.textContent = this.locationName;// give td content
   trElement.appendChild(tdElement);// append td to tr
+
   //Now loop through each hour and populate the cell with sales projection
   var hoursOpen = (this.closingTime-this.openingTime)/100;
   for(var i=0; i<hoursOpen; i++) {
@@ -71,6 +75,13 @@ CookieShop.prototype.renderRow = function() {
     tdElement.textContent = this.hourlyProjections[i];
     trElement.appendChild(tdElement);
   }
+
+  //Add the location total as the last td/cell in the row
+  tdElement = document.createElement('td');
+  tdElement.textContent = this.totalCookiesPerDay;
+  trElement.appendChild(tdElement);
+
+  //Finally - add the newly populated row to the table.
   cookieShopLocationTable.appendChild(trElement);
 };
 
