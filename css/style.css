@@ -34,6 +34,7 @@ td {
   font-family: 'Times', serif;
   font-size: medium;
   color: black;
+  padding: 0% 25%;
 }
 
 body {
@@ -47,6 +48,10 @@ img.brand {
 
 table, th, td {
   border: 1px solid black;
+}
+
+.tabular-data {
+  /*nothing works*/
 }
 
 nav ul {
@@ -73,7 +78,7 @@ nav a:hover {
 
 .boxed {
   border: 1px solid silver;
-  margin: 10px 320px 10px 320px
+  margin: 10px 500px;
 }
 
 img.medium {
