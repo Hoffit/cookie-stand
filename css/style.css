@@ -2,10 +2,7 @@ body {
   background-color: rgba(0, 250, 154, 0.5);
 }
 
-header {
-  display:block;
-}
-
+/*Several fonts (lab instructions included)*/
 /*1. A custom Google font for highlights*/
 h1 {
   font-family: 'Lobster', cursive;
@@ -13,62 +10,72 @@ h1 {
   color: salmon;
   padding: 15px 5px 15px 5px;
 }
-
-/*1. A custom Google font for highlights*/
-h5 {
-  font-family: 'Lobster', cursive;
-  color: salmon;
-  font-size: small;
-  padding: 10px 5px 10px 5px;
-}
-/*1. A custom Google font for highlights*/
 h2, h3, h4 {
   font-family: 'Lobster', cursive;
   color: salmon;
   font-size: large;
   padding: 10px 5px 10px 5px;
 }
-
-.data-header {
+h5 {
   font-family: 'Lobster', cursive;
   color: salmon;
-  font-size: large;
-  padding: 10px 5px 1px 5px;
+  font-size: small;
+  padding: 10px 5px 10px 5px;
 }
-
-/*2. A specified standard san-serif web font for data (such as Arial, Verdana, or Helvetica)*/
+/*2. A san-serif web font for data*/
 td {
   font-family: 'Helvetica', sans-serif;
   color:blue;
   font-size: small;
   padding: 1px 5px 1px 15px;
 }
-
-/*3. A specified standard serif web font for text (such as Georgia, Times, etc.)*/
+/*3. A serif web font for text*/
 .text {
   font-family: 'Times', serif;
-  color: black
+  font-size: medium;
+  color: black;
 }
 
-ul {
-  display: block;
-  list-style-type: disc;
-  margin-top: 1em;
-  margin-bottom: 1 em;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 40px;
+body {
+  text-align: center
 }
 
-img.medium {
-  height: 150px;
-}
-
-.boxed {
-  border: 1px solid silver;
-  padding: 10px 5px 10px 5px
+img.brand {
+  opacity: 1.0;
+  height: 75px;
 }
 
 table, th, td {
   border: 1px solid black;
+}
+
+nav ul {
+  background-color: #666;
+  text-align: center;
+}
+
+nav li {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  margin: 0px 20px 0px 20px;
+  line-height: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+
+nav a:hover {
+  background-color: #111;
+}
+
+.boxed {
+  border: 1px solid silver;
+  margin: 10px 320px 10px 320px
+}
+
+img.medium {
+  height: 30px;
 }
