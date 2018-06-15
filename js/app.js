@@ -36,7 +36,7 @@ function CookieShop(locationName, minCustomersPerHour, maxCustomersPerHour, aver
 
 //Simulate real sales data using random number of customers in a range.
 CookieShop.prototype.calculateCustomersPerHour = function() {
-  return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour; 
+  return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour;
 };
 
 //Use the simulated customer data from calculateCustomersPerHour to create hourly sales projections.
@@ -128,18 +128,14 @@ CookieShop.addNewCookieShop = function(event) {
   // always put this first, it will prevent the default behavior of the browser, which is to refresh the page when the form is submitted
   event.preventDefault();
   var newLocationName = event.target.locationName.value;
-  var newMinCustomersPerHour = event.target.minCustomersPerHour.value;
-  var newMaxCustomersPerHour = event.target.maxCustomersPerHour.value;
-  var newAverageCookiesPerCustomer = event.target.averageCookiesPerCustomer.value;
+  var newMinCustomersPerHour = parseInt(event.target.minCustomersPerHour.value);
+  var newMaxCustomersPerHour = parseInt(event.target.maxCustomersPerHour.value);
+  var newAverageCookiesPerCustomer = parseFloat(event.target.averageCookiesPerCustomer.value);
 
-  new CookieShop(newLocationName, newMinCustomersPerHour, newMaxCustomersPerHour, newAverageCookiesPerCustomer);
+  var newCookieShop = new CookieShop(newLocationName, newMinCustomersPerHour, newMaxCustomersPerHour, newAverageCookiesPerCustomer);
   hourlySalesTotal.push(0);
-  console.log(cookieShopLocations);
-/*
-  dogTable.textContent = '';
-  Dog.renderHeader();
-  Dog.renderAllDogs();
-  */
+  console.log(newCookieShop);
+  newCookieShop.renderRow();
 };
 
 //Instantiate five cookie shop objects.
@@ -152,6 +148,7 @@ new CookieShop('Alki', 2, 16, 4.6);
 // Add the event listener to the form
 newLocationForm.addEventListener('submit', CookieShop.addNewCookieShop);
 
+//Render the sales data table
 CookieShop.renderHeader();
 CookieShop.renderAllShops();
 CookieShop.calculateHourlyTotals();
