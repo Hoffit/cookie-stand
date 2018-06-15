@@ -8,10 +8,14 @@
 var cookieShopLocations = [];
 
 //Create a totals array for each hour stores are open
+//Initialize with zeroes otherise result is NAN later
 var hourlySalesTotal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 //Get the DOM table object to populate with location sales information.
 var cookieShopLocationTable = document.getElementById('CookieShopSalesTable');
+
+//Get the DOM form object to support user addition of new store locations
+var newLocationForm = document.getElementById('store-sales-form');
 
 /**
  * Cookie Shop Object with constructor and methods.
@@ -119,12 +123,34 @@ CookieShop.calculateHourlyTotals = function() {
   }
 };
 
+// Callback function for when the form is submitted
+CookieShop.addNewCookieShop = function(event) {
+  // always put this first, it will prevent the default behavior of the browser, which is to refresh the page when the form is submitted
+  event.preventDefault();
+  var newLocationName = event.target.locationName.value;
+  var newMinCustomersPerHour = event.target.minCustomersPerHour.value;
+  var newMaxCustomersPerHour = event.target.maxCustomersPerHour.value;
+  var newAverageCookiesPerCustomer = event.target.averageCookiesPerCustomer.value;
+
+  new CookieShop(newLocationName, newMinCustomersPerHour, newMaxCustomersPerHour, newAverageCookiesPerCustomer);
+  hourlySalesTotal.push(0);
+  console.log(cookieShopLocations);
+/*
+  dogTable.textContent = '';
+  Dog.renderHeader();
+  Dog.renderAllDogs();
+  */
+};
+
 //Instantiate five cookie shop objects.
 new CookieShop('1st and Pike', 23, 65, 6.3);
 new CookieShop('SeaTac Airport', 3, 24, 1.2);
 new CookieShop('Seattle Center', 11, 38, 3.7);
 new CookieShop('Capitol Hill', 20, 38, 2.3);
 new CookieShop('Alki', 2, 16, 4.6);
+
+// Add the event listener to the form
+newLocationForm.addEventListener('submit', CookieShop.addNewCookieShop);
 
 CookieShop.renderHeader();
 CookieShop.renderAllShops();

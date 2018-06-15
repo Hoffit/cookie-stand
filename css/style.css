@@ -16,6 +16,13 @@ h2, h3, h4 {
   font-size: large;
   padding: 10px 5px 10px 5px;
 }
+
+legend {
+  font-family: 'Lobster', cursive;
+  color: salmon;
+  font-size: large;
+  padding:50px 5px 10px 5px;
+}
 h5 {
   font-family: 'Lobster', cursive;
   color: salmon;
@@ -34,6 +41,7 @@ td {
   font-family: 'Times', serif;
   font-size: medium;
   color: black;
+  padding: 0% 25%;
 }
 
 body {
@@ -47,6 +55,11 @@ img.brand {
 
 table, th, td {
   border: 1px solid black;
+}
+
+.location-sales-data {
+  width: 80%;
+  margin: 0 auto;/*auto will effectively center because left/right are auto (tricky)*/
 }
 
 nav ul {
@@ -73,7 +86,7 @@ nav a:hover {
 
 .boxed {
   border: 1px solid silver;
-  margin: 10px 320px 10px 320px
+  margin: 10px 500px;
 }
 
 img.medium {
