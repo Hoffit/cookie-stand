@@ -16,6 +16,13 @@ h2, h3, h4 {
   font-size: large;
   padding: 10px 5px 10px 5px;
 }
+
+legend {
+  font-family: 'Lobster', cursive;
+  color: salmon;
+  font-size: large;
+  padding:50px 5px 10px 5px;
+}
 h5 {
   font-family: 'Lobster', cursive;
   color: salmon;
@@ -50,8 +57,9 @@ table, th, td {
   border: 1px solid black;
 }
 
-.tabular-data {
-  /*nothing works*/
+.location-sales-data {
+  width: 80%;
+  margin: 0 auto;/*auto will effectively center because left/right are auto (tricky)*/
 }
 
 nav ul {

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Salmon cookie merch page
+  Salmon cookie sales page
 -->
 <html>
   <head>
@@ -29,9 +29,31 @@
     </header>
     <main>
       <h2>Store Sales Data</h2>
-      <section class="tabular-data">
-        <table id='CookieShopSalesTable'></table>
-      </section>
+      <table id='CookieShopSalesTable' class="location-sales-data"></table>
+
+<form id="store-sales-form">
+  <fieldset>
+    <legend>Add A New Location</legend>
+    
+    <label for="locationName">Location Name:</label>
+    <input name="locationName" type="text" required>
+    
+    <label for="minCustomersPerHour">Min Customers per Hour:</label>
+    <input name="minCustomersPerHour" type="text" required>
+
+    <label for="maxCustomersPerHour">Max Customers per Hour:</label>
+    <input name="maxCustomersPerHour" type="text" required>
+
+    <label for="averageCookiesPerCustomer">Average Cookies Per Customer:</label>
+    <input name="averageCookiesPerCustomer" type="text" required>
+    
+    <button>Add!</button>
+  </fieldset>
+</form>
+
+
+
+
     </main>
     <footer>
     </footer>
