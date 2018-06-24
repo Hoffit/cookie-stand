@@ -9,7 +9,7 @@ var cookieShopLocations = [];
 
 //Create a totals array for each hour stores are open
 //Initialize with zeroes otherise result is NAN later
-var hourlySalesTotal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var hourlySalesTotal = [];
 
 //Get the DOM table object to populate with location sales information.
 var cookieShopLocationTable = document.getElementById('CookieShopSalesTable');
@@ -19,7 +19,6 @@ var newLocationForm = document.getElementById('store-sales-form');
 
 /**
  * Cookie Shop Object with constructor and methods.
- *
  */
 function CookieShop(locationName, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer) {
   this.locationName = locationName;
@@ -35,14 +34,14 @@ function CookieShop(locationName, minCustomersPerHour, maxCustomersPerHour, aver
 }
 
 //Simulate real sales data using random number of customers in a range.
-CookieShop.prototype.calculateCustomersPerHour = function() {
+CookieShop.prototype.calculateCustomersPerHour = function () {
   return Math.floor(Math.random() * (this.maxCustomersPerHour - this.minCustomersPerHour)) + this.minCustomersPerHour;
 };
 
 //Use the simulated customer data from calculateCustomersPerHour to create hourly sales projections.
-CookieShop.prototype.calculateCookiesPerHour = function() {
-  var hoursOpen = (this.closingTime-this.openingTime)/100;
-  for(var i=0; i<hoursOpen; i++) {
+CookieShop.prototype.calculateCookiesPerHour = function () {
+  var hoursOpen = (this.closingTime - this.openingTime) / 100;
+  for (var i = 0; i < hoursOpen; i++) {
     this.hourlyProjections[i] = this.calculateCustomersPerHour();
     this.totalCookiesPerDay += this.hourlyProjections[i];
   }
@@ -50,20 +49,24 @@ CookieShop.prototype.calculateCookiesPerHour = function() {
 
 //Create the table header, one column for each hour of shop data.
 CookieShop.renderHeader = function () {
+  var tableHead = document.createElement('thead');
   var headerRow = document.createElement('tr');
-  var headings = ['', '6:00am','7:00am','8:00a,','9:00am', '10:00am', '11:00', '12:00pm',
+  var headings = ['', '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00', '12:00pm',
     '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', 'Total'];
-  for(var i=0; i<headings.length; i++) {
-    var thElement = document.createElement('th');// 1. create th elements
-    thElement.textContent = headings[i];// 2. fill in their content
-    headerRow.appendChild(thElement);// 3. append th to headerRow
-    cookieShopLocationTable.appendChild(headerRow);
+  for (var i = 0; i < headings.length; i++) {
+    var thElement = document.createElement('th');
+    thElement.textContent = headings[i];
+    headerRow.appendChild(thElement);
   }
+  tableHead.appendChild(headerRow);
+  cookieShopLocationTable.appendChild(tableHead);
 };
 
 //Enable shop instance to populate table row with their hourly sales projections
-CookieShop.prototype.renderRow = function() {
+CookieShop.prototype.renderRow = function () {
 
+  //Grab parent element for new table row
+  var tBodyElement = cookieShopLocationTable.childNodes[1];
   var trElement = document.createElement('tr');// create tr
 
   //Populate first cell in row with shop name
@@ -73,8 +76,8 @@ CookieShop.prototype.renderRow = function() {
   trElement.appendChild(tdElement);// append td to tr
 
   //Now loop through each hour and populate the cell with sales projection
-  var hoursOpen = (this.closingTime-this.openingTime)/100;
-  for(var i=0; i<hoursOpen; i++) {
+  var hoursOpen = (this.closingTime - this.openingTime) / 100;
+  for (var i = 0; i < hoursOpen; i++) {
     tdElement = document.createElement('td');
     tdElement.textContent = this.hourlyProjections[i];
     trElement.appendChild(tdElement);
@@ -86,56 +89,83 @@ CookieShop.prototype.renderRow = function() {
   trElement.appendChild(tdElement);
 
   //Finally - add the newly populated row to the table.
-  cookieShopLocationTable.appendChild(trElement);
+  tBodyElement.appendChild(trElement);
 };
 
 //Enable shop instance to populate table row with their hourly sales projections
-CookieShop.renderFooter = function() {
-  var trElement = document.createElement('tr');// create tr
-  var tdElement = document.createElement('td');// create td
-  tdElement.textContent = 'Total';// give td content
-  trElement.appendChild(tdElement);// append td to tr
+CookieShop.renderFooter = function () {
+  var totalTotal = 0;//The total of all the hourly totals
+  var tfoot = document.createElement('tfoot');
+  var trElement = document.createElement('tr');
+  var tdElement = document.createElement('td');
+  tdElement.textContent = 'Total';
+  trElement.appendChild(tdElement);
+
   //Loop through the 15 hours of open time, and populate sums
-  for(var i=0; i<hourlySalesTotal.length; i++) {
+  var hourlyTotal = 0;
+  for (var i = 0; i < hourlySalesTotal.length; i++) {
     tdElement = document.createElement('td');
-    tdElement.textContent = hourlySalesTotal[i];
+    hourlyTotal = hourlySalesTotal[i];
+    tdElement.textContent = hourlyTotal;
     trElement.appendChild(tdElement);
+    totalTotal += hourlyTotal;
   }
-  cookieShopLocationTable.appendChild(trElement);
+
+  //Add the bottom right cell to the table -> total of totals
+  tdElement = document.createElement('td');
+  tdElement.textContent = totalTotal;
+  trElement.appendChild(tdElement);
+
+  tfoot.appendChild(trElement);
+  cookieShopLocationTable.appendChild(tfoot);
 };
 
 //Convenience method to loop through and render all the shops sales data.
-CookieShop.renderAllShops = function() {
-  for(var i=0; i<cookieShopLocations.length; i++) {
+CookieShop.renderAllShops = function () {
+  for (var i = 0; i < cookieShopLocations.length; i++) {
     cookieShopLocations[i].renderRow();
   }
 };
 
 //Build out hourly totals array for table footer
-CookieShop.calculateHourlyTotals = function() {
-  for(var i=0; i<cookieShopLocations.length; i++) {
+CookieShop.calculateHourlyTotals = function () {
+
+  //Initialize/reset totals array
+  var numberOfHourlyProjections = cookieShopLocations[0].hourlyProjections.length;
+  for (var k = 0; k < numberOfHourlyProjections; k++) {
+    hourlySalesTotal[k] = 0;
+  }
+
+  for (var i = 0; i < cookieShopLocations.length; i++) {
     var aCookieShop = cookieShopLocations[i];
-    var numberOfHourlyProjections = aCookieShop.hourlyProjections.length;
-    console.log(aCookieShop);
-    for(var j=0; j<numberOfHourlyProjections; j++) {
+    for (var j = 0; j < numberOfHourlyProjections; j++) {
       hourlySalesTotal[j] += aCookieShop.hourlyProjections[j];
     }
   }
 };
 
 // Callback function for when the form is submitted
-CookieShop.addNewCookieShop = function(event) {
+CookieShop.addNewCookieShop = function (event) {
   // always put this first, it will prevent the default behavior of the browser, which is to refresh the page when the form is submitted
   event.preventDefault();
+
   var newLocationName = event.target.locationName.value;
   var newMinCustomersPerHour = parseInt(event.target.minCustomersPerHour.value);
   var newMaxCustomersPerHour = parseInt(event.target.maxCustomersPerHour.value);
   var newAverageCookiesPerCustomer = parseFloat(event.target.averageCookiesPerCustomer.value);
 
-  var newCookieShop = new CookieShop(newLocationName, newMinCustomersPerHour, newMaxCustomersPerHour, newAverageCookiesPerCustomer);
-  hourlySalesTotal.push(0);
-  console.log(newCookieShop);
-  newCookieShop.renderRow();
+  new CookieShop(newLocationName, newMinCustomersPerHour, newMaxCustomersPerHour, newAverageCookiesPerCustomer);
+
+  //Reset the body and footer parts of table in prep for re-render
+  cookieShopLocationTable.replaceChild(
+    document.createElement('tbody'),
+    cookieShopLocationTable.childNodes[1]);
+  cookieShopLocationTable.removeChild(cookieShopLocationTable.lastChild);
+
+  //Render the sales data table
+  CookieShop.calculateHourlyTotals();
+  CookieShop.renderAllShops();
+  CookieShop.renderFooter();
 };
 
 //Instantiate five cookie shop objects.

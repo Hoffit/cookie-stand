@@ -3,60 +3,75 @@
   Salmon cookie sales page
 -->
 <html>
-  <head>
-      <title>Pat's Salmon Cookies - Merchandise</title>
-      <link rel="stylesheet" href="../css/reset.css">
-      <link rel="stylesheet" href="../css/style.css">
-      <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <section class="header-inner">
-        <h1>Pats Terrible Salmon Cookies</h1>
-        <img src="../img/frosted-cookie.png" class="brand">
-        <nav>
-          <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="store.html">Store</a></li>
-            <li><a href="sales.html">Sales</a></li>
-          </ul>
-        </nav>
-      </section>
-    </header>
-    <main>
-      <h2>Store Sales Data</h2>
-      <table id='CookieShopSalesTable' class="location-sales-data"></table>
 
-<form id="store-sales-form">
-  <fieldset>
-    <legend>Add A New Location</legend>
-    
-    <label for="locationName">Location Name:</label>
-    <input name="locationName" type="text" required>
-    
-    <label for="minCustomersPerHour">Min Customers per Hour:</label>
-    <input name="minCustomersPerHour" type="text" required>
+<head>
+  <title>Pat's Salmon Cookies - Merchandise</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
 
-    <label for="maxCustomersPerHour">Max Customers per Hour:</label>
-    <input name="maxCustomersPerHour" type="text" required>
+<body>
+  <header>
+    <section class="header-inner">
+      <h1>Pats Terrible Salmon Cookies</h1>
+      <img src="../img/frosted-cookie.png" class="brand">
+      <nav>
+        <ul>
+          <li>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="about.html">About</a>
+          </li>
+          <li>
+            <a href="locations.html">Locations</a>
+          </li>
+          <li>
+            <a href="store.html">Store</a>
+          </li>
+          <li>
+            <a href="sales.html">Sales</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+  </header>
+  <main>
+    <h2>Store Sales Data</h2>
+    <table id='CookieShopSalesTable'>
+      <tbody></tbody>
+    </table>
 
-    <label for="averageCookiesPerCustomer">Average Cookies Per Customer:</label>
-    <input name="averageCookiesPerCustomer" type="text" required>
-    
-    <button>Add!</button>
-  </fieldset>
-</form>
+    <form id="store-sales-form">
+      <fieldset>
+        <legend>Add A New Location</legend>
 
+        <label for="locationName">Location Name:</label>
+        <input name="locationName" type="text" required>
 
+        <div class="form">
+          <label for="minCustomersPerHour">Min Customers per Hour:</label>
+          <input name="minCustomersPerHour" type="text" required size="1">
 
+          <label for="maxCustomersPerHour">Max Customers per Hour:</label>
+          <input name="maxCustomersPerHour" type="text" required size="1">
+        </div>
 
-    </main>
-    <footer>
-    </footer>
-    <script src="../js/app.js"></script>
-  </body>
+        <div class="form">
+          <label for="averageCookiesPerCustomer">Average Cookies Per Customer:</label>
+          <input name="averageCookiesPerCustomer" type="text" required size="1">
+        </div>
+
+        <button>Add!</button>
+      </fieldset>
+    </form>
+  </main>
+  <footer>
+  </footer>
+  <script src="../js/app.js"></script>
+</body>
+
 </html>

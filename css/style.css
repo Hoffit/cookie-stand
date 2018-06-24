@@ -29,6 +29,9 @@ h5 {
   font-size: small;
   padding: 10px 5px 10px 5px;
 }
+th {
+  padding: 2.5px;
+}
 /*2. A san-serif web font for data*/
 td {
   font-family: 'Helvetica', sans-serif;
@@ -57,7 +60,7 @@ table, th, td {
   border: 1px solid black;
 }
 
-.location-sales-data {
+#CookieShopSalesTable {
   width: 80%;
   margin: 0 auto;/*auto will effectively center because left/right are auto (tricky)*/
 }
@@ -87,6 +90,10 @@ nav a:hover {
 .boxed {
   border: 1px solid silver;
   margin: 10px 500px;
+}
+
+.form {
+  margin: 10px;
 }
 
 img.medium {
